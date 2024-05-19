@@ -372,11 +372,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a91ec8f07124164db326621f72a8ab0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravity: {x: 0, y: -10}
+  gravity: {x: 0, y: 0}
   time_step: 0.001
   elastic: 0.95
-  wall: 4
-  N: 25
+  wall: 8
+  N: 16
   radius: 0.5
   particle: {fileID: 6395146937694526937, guid: c0e0a97e40b556841be5837b95382b00, type: 3}
   audioSource: {fileID: 150358008}

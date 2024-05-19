@@ -19,7 +19,7 @@ public class particle_script : MonoBehaviour
         velocity = new Vector2(Random.Range(-8.0f, 8.0f), Random.Range(0.0f, 5.0f));
         radius = main.radius;
         Vector3 scale = new Vector3(radius * 2f, radius * 2f, radius * 2f);
-        this.transform.localScale = scale;
+        transform.localScale = scale;
     }
 
     // Update is called once per frame
