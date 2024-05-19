@@ -43,11 +43,13 @@ public class main_script : MonoBehaviour
         for (int i = 0; i < Mathf.Sqrt(N); i++)
             for (int j = 0; j < Mathf.Sqrt(N); j++)
             {
-                particles.Add(Instantiate(particle, new Vector3(-4.0f + 2.0f * radius + i * (8.0f - 3.0f * radius) / Mathf.Sqrt(N), -4.0f + 2.0f * radius + j * (8.0f - 3.0f * radius) / Mathf.Sqrt(N)), Quaternion.identity));
+                //particles.Add(Instantiate(particle, new Vector3(-4.0f + 2.0f * radius + i * (8.0f - 3.0f * radius) / Mathf.Sqrt(N), -4.0f + 2.0f * radius + j * (8.0f - 3.0f * radius) / Mathf.Sqrt(N)), Quaternion.identity));
+                particles.Add(Instantiate(particle, new Vector3(-2.0f + 4.0f * i, -2.0f + 4.0f * j, -0.1f), Quaternion.identity));
 
                 particle_script this_particle = particles[k++].GetComponent<particle_script>();
                 Vector3 pos = this_particle.transform.position;
-                this_particle.velocity = new Vector2(Random.Range(-8.0f, 8.0f), Random.Range(0.0f, 5.0f));
+                //this_particle.velocity = new Vector2(Random.Range(-8.0f, 8.0f), Random.Range(0.0f, 5.0f));
+                this_particle.velocity = new Vector2(0f, 0f);
                 this_particle.radius = radius;
                 Vector3 scale = new Vector3(radius * 2f, radius * 2f, radius * 2f);
                 this_particle.transform.localScale = scale;
@@ -60,7 +62,8 @@ public class main_script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Invoke("search", time_step);
+        //Invoke("search", time_step);
+        search();
     }
 
     void search()
@@ -74,7 +77,7 @@ public class main_script : MonoBehaviour
         {
             particle_script this_particle = particles[i].GetComponent<particle_script>();
             Vector3 this_pos = this_particle.transform.position;
-            if ((int)((this_pos.x + wall / 2f) / L) > grid || (int)((this_pos.x + wall / 2f) / L) < 0)
+            if ((int)((this_pos.x + wall / 2f) / L) > grid-1 || (int)((this_pos.x + wall / 2f) / L) < 0)
                 this_pos.x = 0;
             if ((int)((this_pos.y + wall / 2f) / L) > grid-1 || (int)((this_pos.y + wall / 2f) / L) < 0)
                 this_pos.y = 0;
@@ -121,7 +124,7 @@ public class main_script : MonoBehaviour
                                 Vector3 another_pos = another_particle.transform.position;
 
                                 Vector2 r = new Vector2(another_pos.x + another_particle.velocity.x * time_step - this_pos.x - this_particle.velocity.x * time_step, another_pos.y + another_particle.velocity.y * time_step - this_pos.y - this_particle.velocity.y * time_step);    //距離ベクトルr
-                                                                                                                                                                                                                                                                                      //Debug.Log(r.magnitude);
+                                //Debug.Log(r.magnitude);
                                 if (r.sqrMagnitude <= Mathf.Pow(this_particle.radius + another_particle.radius, 2f))
                                 {
                                     Vector2 v = new Vector2(this_particle.velocity.x - another_particle.velocity.x, this_particle.velocity.y - another_particle.velocity.y);    //相対速度v
