@@ -39,9 +39,19 @@ public class main_script : MonoBehaviour
         L = wall / _grid;
         radius = L / 1.42f;
         */
+        int k = 0;
         for (int i = 0; i < Mathf.Sqrt(N); i++)
             for (int j = 0; j < Mathf.Sqrt(N); j++)
+            {
                 particles.Add(Instantiate(particle, new Vector3(-4.0f + 2.0f * radius + i * (8.0f - 3.0f * radius) / Mathf.Sqrt(N), -4.0f + 2.0f * radius + j * (8.0f - 3.0f * radius) / Mathf.Sqrt(N)), Quaternion.identity));
+
+                particle_script this_particle = particles[k++].GetComponent<particle_script>();
+                Vector3 pos = this_particle.transform.position;
+                this_particle.velocity = new Vector2(Random.Range(-8.0f, 8.0f), Random.Range(0.0f, 5.0f));
+                this_particle.radius = radius;
+                Vector3 scale = new Vector3(radius * 2f, radius * 2f, radius * 2f);
+                this_particle.transform.localScale = scale;
+            }
 
         //particles.Add(Instantiate(particle, new Vector3(-2f, 0f, 0.0f), Quaternion.identity));
         //particles.Add(Instantiate(particle, new Vector3(2f, 0f, 0.0f), Quaternion.identity));
@@ -137,6 +147,17 @@ public class main_script : MonoBehaviour
 
 
             }
+
+
+        for (int i = 0; i < N; i++)
+        {
+            particle_script this_particle = particles[i].GetComponent<particle_script>();
+            Vector3 pos = this_particle.transform.position;
+
+            pos.x += this_particle.velocity.x * time_step;
+            pos.y += this_particle.velocity.y * time_step;
+            this_particle. transform.position = pos;
+        }
 
 
 

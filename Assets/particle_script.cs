@@ -14,27 +14,16 @@ public class particle_script : MonoBehaviour
 
     void Start()
     {
-        script = GameObject.Find("main");
-        main = script.GetComponent<main_script>();
-        velocity = new Vector2(Random.Range(-8.0f, 8.0f), Random.Range(0.0f, 5.0f));
-        radius = main.radius;
-        Vector3 scale = new Vector3(radius * 2f, radius * 2f, radius * 2f);
-        transform.localScale = scale;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Invoke("accelerate", main.time_step);
     }
 
     void accelerate()
     {
 
-        Vector3 pos = transform.position;
-        pos.x += velocity.x * main.time_step;
-        pos.y += velocity.y * main.time_step;
-        transform.position = pos;
 
         /*
 
